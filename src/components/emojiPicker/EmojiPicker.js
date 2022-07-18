@@ -2,6 +2,7 @@ import { forwardRef, useRef, useState, useEffect } from "react"
 import {data as emojiList} from "./data"
 import EmojiButton from "./EmojiButton";
 import EmojiSearch from "./EmojiSearch";
+import styles from "./emojiPicker.module.scss"
 
 export function EmojiPicker(props, inputRef){
 
@@ -58,12 +59,12 @@ export function EmojiPicker(props, inputRef){
         inputRef.current.selectionEnd = cursorPos + emoji.symbol.length;
         inputRef.current.focus();
     }
-    return <div ref={containerRef}>
-        <button onClick={handleClickOpen}>😊</button>
+    return <div ref={containerRef} className={styles.inputContainer}>
+        <button onClick={handleClickOpen} className={styles.emojiPickerButton}>😊</button>
         {isOpen ? (
-        <div>
+        <div className={styles.emojiPickerContainer}>
             <EmojiSearch onSearch={handleSearch}/>
-            <div>
+            <div className={styles.emojiList}>
                 {emojis.map((emoji) => (
                     <EmojiButton key={emoji.symbol} emoji={emoji} onClick={handleOnClickEmoji}></EmojiButton>))}
             </div>
